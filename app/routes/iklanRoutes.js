@@ -9,10 +9,10 @@ const {
     deleteIklan,
 } = require('../controllers/airportController');
 
-router.get('/', getAirport);
-router.get('/:id', getAirplaneById);
-router.post('/', auth, isAdmin, addAirport);
-router.put('/:id', auth, isAdmin, updateAirport);
-router.delete('/:id', auth, isAdmin, deleteAirport);
+router.get('/', getIklan);
+router.get('/:id', getIklanById);
+router.post('/', auth, isAdmin, addIklan);
+router.put('/:id', auth, isAdmin, updateIklan);
+router.delete('/:id', auth, isAdmin, deleteIklan);
 
 module.exports = router;
