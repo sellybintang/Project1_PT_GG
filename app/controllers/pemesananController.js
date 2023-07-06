@@ -1,11 +1,58 @@
-const { pemesanan } = require('../models');
+const { Pemesanan, Users, jenisPembayaran, Iklan } = require('../models');
 
-const getPemesanan = async (req, res) => {
+let getPemesanan = async (req, res) => {
     try {
-        const pemesanans = await pemesanan.findAll();
+        const pemesanans = await Pemesanan.findAll({
+            orders:["createdAt", "DESC"]
+        },
+            {
+                include: [
+                    {
+                        model: Users
+                    },
+                    {
+                        model: Iklan
+                    },
+                    {
+                        model: jenisPembayaran
+                    },
+                ],
+            }
+        );
         res.status(200).json({
-            message: 'data semua bandara',
+            message: 'data Arsip semua Penjualan',
             pemesanans,
+        });
+    } catch (error) {
+        res.status(error.statusCode || 500).json({
+            message: error.message,
+        });
+    }
+};
+
+let pemesananUser = async (req, res) => {
+    try {
+        let pemesanan = await Users.findByPk(req.user.id,
+            {orders:["createdAt", "DESC"]
+            },
+            {
+                include: [
+                    {
+                        model: Pemesanan,
+                        include: [
+                            {
+                                model: Iklan,
+                            },
+                            {
+                                model: jenisPembayaran
+                            },
+                        ],
+                    },
+                ],
+            }
+        ) ;
+        res.status(200).json({
+            bookings,
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
@@ -17,9 +64,9 @@ const getPemesanan = async (req, res) => {
 const getPemesananById = async (req, res) => {
     try {
         const { id, } = req.params;
-        const onePemesanan = await pemesanan.findOne({ where: { id, }, });
+        const onePemesanan = await Pemesanan.findOne({ where: { id, }, });
         res.status(200).json({
-            pemesanan: onePemesanan,
+            Pemesanan: onePemesanan,
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
@@ -28,11 +75,22 @@ const getPemesananById = async (req, res) => {
     }
 };
 
-const addPemesanan = async (req, res) => {
+const createPemesanan = async (req, res) => {
+    const {
+        id_iklan, 
+        id_jenispembayaran, 
+        total_pembayaran 
+    } =req.body;
+
     try {
-        const newPemesanan = await pemesanan.create(req.body);
+        const newPemesanan = await Pemesanan.create({
+            id_users:req.users.id,
+            id_iklan,
+            id_jenispembayaran,
+            total_pembayaran,
+        });
         res.status(200).json({
-            message: 'data bandara berhasil ditambahkan',
+            message: 'data Penjualan berhasil ditambahkan',
             newPemesanan,
         });
     } catch (error) {
@@ -45,9 +103,9 @@ const addPemesanan = async (req, res) => {
 const updatePemesanan = async (req, res) => {
     try {
         const { id, } = req.params;
-        await pemesanan.update(req.body, { where: { id, }, });
+        await Pemesanan.update(req.body, { where: { id, }, });
         res.status(200).json({
-            message: 'data bandara berhasil diubah',
+            message: 'data Penjualan berhasil diubah',
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
@@ -59,9 +117,9 @@ const updatePemesanan = async (req, res) => {
 const deletePemesanan = async (req, res) => {
     try {
         const { id, } = req.params;
-        await pemesanan.destroy({ where: { id, }, });
+        await Pemesanan.destroy({ where: { id, }, });
         res.status(200).json({
-            message: 'data bandara berhasil dihapus',
+            message: 'data Penjualan berhasil dihapus',
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
@@ -73,7 +131,7 @@ const deletePemesanan = async (req, res) => {
 module.exports = {
     getPemesanan,
     getPemesananById,
-    addPemesanan,
+    createPemesanan,
     updatePemesanan,
     deletePemesanan,
 };

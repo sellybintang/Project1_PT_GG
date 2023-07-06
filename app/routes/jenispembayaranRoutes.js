@@ -7,7 +7,7 @@ const {
     addJenispembayaran,
     updateJenispembayaran,
     deleteJenispembayaran,
-} = require('../controllers/airportController');
+} = require('../controllers/jenispembayaranController');
 
 router.get('/', getJenispembayaran);
 router.get('/:id', getJenispembayaranById);

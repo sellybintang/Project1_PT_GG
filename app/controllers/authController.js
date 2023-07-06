@@ -84,7 +84,7 @@ const getProfile = async (req, res) => {
 
 const updateProfile = async (req, res) => {
   const { id, } = req.user;
-  const { file, } = req;
+  // const { file, } = req;
   const {
     firstName,
     lastName,
@@ -92,27 +92,7 @@ const updateProfile = async (req, res) => {
     phoneNumber,
   } = req.body;
 
-  if (file) {
-    // const validFormat =
-    //   file.mimetype === "image/jpeg" ||
-    //   file.mimetype === "image/png" ||
-    //   file.mimetype === "image/jpg" ||
-    //   file.mimetype === "image/gif";
-    // if (!validFormat) {
-    //   return res.status(400).json({
-    //     status: "failed",
-    //     message: "Format file tidak valid",
-    //   });
-    // }
-    const split = file.originalname.split('.');
-    const extension = split[split.length - 1];
-
-    // const img = await imagekit.upload({
-    //   file: file.buffer.toString('base64'),
-    //   fileName: `${id}.${extension}`,
-    // });
-
-    const updatedUser = await User.update(
+  const updatedUser = await User.update(
       {
         firstName,
         lastName,
@@ -123,31 +103,11 @@ const updateProfile = async (req, res) => {
     );
     res.status(200).json({ message: "Profile berhasil diupdate", updatedUser });
   };
-};
-// const loginGoogle = async (req, res) => {
-//   try {
-//     console.log('masuk');
-//     const code = req.query.code;
-//     if (!code) {
-//       const url = googleOauth2.generateAuthURL();
-//       return res.redirect(url);
-//     }
-//     const tokens = await googleOauth2.setCredentials(code);
-//     const { data } = await googleOauth2.getUserData();
-//     return res.status(200).json({
-//       data,
-//       tokens,
-//     });
-//   } catch (error) {
-//     console.log(error)
-//   }
-// };
 
 module.exports = {
   login,
   register,
   verify,
   getProfile,
-  updateProfile,
-  loginGoogle,
+  updateProfile
 };

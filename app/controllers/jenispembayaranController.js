@@ -1,10 +1,10 @@
-const { jenispembayaran } = require('../models');
+const { jenisPembayaran } = require('../models');
 
 const getJenispembayaran = async (req, res) => {
     try {
-        const jenispembayarans = await jenispembayaran.findAll();
+        const jenispembayarans = await jenisPembayaran.findAll();
         res.status(200).json({
-            message: 'data semua bandara',
+            message: 'data semua jenis pembayaran ',
             jenispembayarans,
         });
     } catch (error) {
@@ -17,9 +17,9 @@ const getJenispembayaran = async (req, res) => {
 const getJenispembayaranById = async (req, res) => {
     try {
         const { id, } = req.params;
-        const oneJenispembayaran = await jenispembayaran.findOne({ where: { id, }, });
+        const oneJenispembayaran = await jenisPembayaran.findOne({ where: { id, }, });
         res.status(200).json({
-            jenispembayaran: oneJenispembayaran,
+            jenisPembayaran: oneJenispembayaran,
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
@@ -30,9 +30,9 @@ const getJenispembayaranById = async (req, res) => {
 
 const addJenispembayaran = async (req, res) => {
     try {
-        const newJenispembayaran = await jenispembayaran.create(req.body);
+        const newJenispembayaran = await jenisPembayaran.create(req.body);
         res.status(200).json({
-            message: 'data bandara berhasil ditambahkan',
+            message: 'data jenis pembayaran berhasil ditambahkan',
             newJenispembayaran,
         });
     } catch (error) {
@@ -45,9 +45,9 @@ const addJenispembayaran = async (req, res) => {
 const updateJenispembayaran = async (req, res) => {
     try {
         const { id, } = req.params;
-        await jenispembayaran.update(req.body, { where: { id, }, });
+        await jenisPembayaran.update(req.body, { where: { id, }, });
         res.status(200).json({
-            message: 'data bandara berhasil diubah',
+            message: 'data jenis pembayaran berhasil diubah',
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({
@@ -59,9 +59,9 @@ const updateJenispembayaran = async (req, res) => {
 const deleteJenispembayaran = async (req, res) => {
     try {
         const { id, } = req.params;
-        await jenispembayaran.destroy({ where: { id, }, });
+        await jenisPembayaran.destroy({ where: { id, }, });
         res.status(200).json({
-            message: 'data bandara berhasil dihapus',
+            message: 'data jenis pembayaran berhasil dihapus',
         });
     } catch (error) {
         res.status(error.statusCode || 500).json({

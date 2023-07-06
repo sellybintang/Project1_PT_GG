@@ -4,14 +4,14 @@ const isAdmin = require('../../middleware/isAdmin');
 const {
     getPemesanan,
     getPemesananById,
-    addPemesanan,
+    createPemesanan,
     updatePemesanan,
     deletePemesanan,
-} = require('../controllers/airportController');
+} = require('../controllers/pemesananController');
 
-router.get('/', getPemesanan);
+router.get('/',auth, isAdmin, getPemesanan);
 router.get('/:id', getPemesananById);
-router.post('/', auth, isAdmin, addPemesanan);
+router.post('/', auth, createPemesanan);
 router.put('/:id', auth, isAdmin, updatePemesanan);
 router.delete('/:id', auth, isAdmin, deletePemesanan);
 
