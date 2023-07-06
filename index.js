@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const router = require('./app/routes/index'); 
+const router = require('./app/routes/iklanRoutes'); 
 
 const app = express();
 const port = process.env.PORT || 2023;

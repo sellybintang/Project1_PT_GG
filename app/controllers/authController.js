@@ -93,24 +93,24 @@ const updateProfile = async (req, res) => {
   } = req.body;
 
   if (file) {
-    const validFormat =
-      file.mimetype === "image/jpeg" ||
-      file.mimetype === "image/png" ||
-      file.mimetype === "image/jpg" ||
-      file.mimetype === "image/gif";
-    if (!validFormat) {
-      return res.status(400).json({
-        status: "failed",
-        message: "Format file tidak valid",
-      });
-    }
+    // const validFormat =
+    //   file.mimetype === "image/jpeg" ||
+    //   file.mimetype === "image/png" ||
+    //   file.mimetype === "image/jpg" ||
+    //   file.mimetype === "image/gif";
+    // if (!validFormat) {
+    //   return res.status(400).json({
+    //     status: "failed",
+    //     message: "Format file tidak valid",
+    //   });
+    // }
     const split = file.originalname.split('.');
     const extension = split[split.length - 1];
 
-    const img = await imagekit.upload({
-      file: file.buffer.toString('base64'),
-      fileName: `${id}.${extension}`,
-    });
+    // const img = await imagekit.upload({
+    //   file: file.buffer.toString('base64'),
+    //   fileName: `${id}.${extension}`,
+    // });
 
     const updatedUser = await User.update(
       {
@@ -124,24 +124,24 @@ const updateProfile = async (req, res) => {
     res.status(200).json({ message: "Profile berhasil diupdate", updatedUser });
   };
 };
-const loginGoogle = async (req, res) => {
-  try {
-    console.log('masuk');
-    const code = req.query.code;
-    if (!code) {
-      const url = googleOauth2.generateAuthURL();
-      return res.redirect(url);
-    }
-    const tokens = await googleOauth2.setCredentials(code);
-    const { data } = await googleOauth2.getUserData();
-    return res.status(200).json({
-      data,
-      tokens,
-    });
-  } catch (error) {
-    console.log(error)
-  }
-};
+// const loginGoogle = async (req, res) => {
+//   try {
+//     console.log('masuk');
+//     const code = req.query.code;
+//     if (!code) {
+//       const url = googleOauth2.generateAuthURL();
+//       return res.redirect(url);
+//     }
+//     const tokens = await googleOauth2.setCredentials(code);
+//     const { data } = await googleOauth2.getUserData();
+//     return res.status(200).json({
+//       data,
+//       tokens,
+//     });
+//   } catch (error) {
+//     console.log(error)
+//   }
+// };
 
 module.exports = {
   login,

@@ -7,7 +7,7 @@ const {
     addIklan,
     updateIklan,
     deleteIklan,
-} = require('../controllers/airportController');
+} = require('../controllers/iklanController');
 
 router.get('/', getIklan);
 router.get('/:id', getIklanById);

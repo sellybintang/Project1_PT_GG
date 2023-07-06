@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {login, register, verify, getProfile, loginGoogle, updateProfile} = require('../controllers/authController');
-const  {getAirport, createAirport, updateAirport, deleteAirport} = require('../controllers/airportController');
+const  {getIklan, createIklan, updateIklan, deleteIklan} = require('../controllers/iklanController');
 
 
 // middleware
@@ -13,11 +13,11 @@ router.get('/auth/profile', auth, getProfile);
 router.get('/auth/google-login' , loginGoogle);
 router.put('/auth/profile', auth, upload.single('image'), updateProfile);
 
-// API Airport
-router.get('/auth/Airport', getAirport);
-router.post('/auth/createAirport', createAirport);
-router.get('/auth/updateAirport', updateAirport);
-router.get('/auth/deleteAirport', deleteAirport);
+// API Iklan
+router.get('/auth/Iklan', getIklan);
+router.post('/auth/createIklan', createIklan);
+router.get('/auth/updateIklan', updateIklan);
+router.get('/auth/deleteIklan', deleteIklan);
 
 
 module.exports = router;
