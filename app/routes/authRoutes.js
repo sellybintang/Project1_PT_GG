@@ -11,7 +11,7 @@ router.post('/auth/register', register);
 router.post('/auth/verify', verify);
 router.get('/auth/profile', auth, getProfile);
 router.get('/auth/google-login' , loginGoogle);
-router.put('/auth/profile', auth, upload.single('image'), updateProfile);
+// router.put('/auth/profile', auth, upload.single('image'), updateProfile);
 
 // API Iklan
 router.get('/auth/Iklan', getIklan);

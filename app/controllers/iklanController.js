@@ -28,7 +28,7 @@ const getIklanById = async (req, res) => {
     }
 };
 
-const addIklan = async (req, res) => {
+const createIklan = async (req, res) => {
     try {
         const newIklan = await iklan.create(req.body);
         res.status(200).json({
@@ -73,7 +73,7 @@ const deleteIklan = async (req, res) => {
 module.exports = {
     getIklan,
     getIklanById,
-    addIklan,
+    createIklan,
     updateIklan,
     deleteIklan,
 };

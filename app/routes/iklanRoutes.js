@@ -4,14 +4,14 @@ const isAdmin = require('../../middleware/isAdmin');
 const {
     getIklan,
     getIklanById,
-    addIklan,
+    createIklan,
     updateIklan,
     deleteIklan,
 } = require('../controllers/iklanController');
 
 router.get('/', getIklan);
 router.get('/:id', getIklanById);
-router.post('/', auth, isAdmin, addIklan);
+router.post('/', auth, isAdmin, createIklan);
 router.put('/:id', auth, isAdmin, updateIklan);
 router.delete('/:id', auth, isAdmin, deleteIklan);
 

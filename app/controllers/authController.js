@@ -39,7 +39,7 @@ const register = async (req, res) => {
     firstName,
     lastName,
     email,
-    password,
+    password: hashedPassword,
     username,
     phoneNumber,
     role
