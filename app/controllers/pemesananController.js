@@ -1,5 +1,6 @@
 const { Pemesanan, Users, jenisPembayaran, Iklan } = require('../models');
 
+// Read All Arsip Penjualan
 let getPemesanan = async (req, res) => {
     try {
         const pemesanans = await Pemesanan.findAll({
@@ -30,37 +31,7 @@ let getPemesanan = async (req, res) => {
     }
 };
 
-let pemesananUser = async (req, res) => {
-    try {
-        let pemesanan = await Users.findByPk(req.user.id,
-            {orders:["createdAt", "DESC"]
-            },
-            {
-                include: [
-                    {
-                        model: Pemesanan,
-                        include: [
-                            {
-                                model: Iklan,
-                            },
-                            {
-                                model: jenisPembayaran
-                            },
-                        ],
-                    },
-                ],
-            }
-        ) ;
-        res.status(200).json({
-            bookings,
-        });
-    } catch (error) {
-        res.status(error.statusCode || 500).json({
-            message: error.message,
-        });
-    }
-};
-
+// Read Arsip Penjualan ById
 const getPemesananById = async (req, res) => {
     try {
         const { id, } = req.params;
@@ -75,6 +46,7 @@ const getPemesananById = async (req, res) => {
     }
 };
 
+// Create Arsip Penjualan
 const createPemesanan = async (req, res) => {
     const {
         id_iklan, 
@@ -84,7 +56,7 @@ const createPemesanan = async (req, res) => {
 
     try {
         const newPemesanan = await Pemesanan.create({
-            id_users:req.users.id,
+            id_users:req.user.id,
             id_iklan,
             id_jenispembayaran,
             total_pembayaran,
@@ -100,6 +72,7 @@ const createPemesanan = async (req, res) => {
     }
 };
 
+// Update Arsip Penjualan
 const updatePemesanan = async (req, res) => {
     try {
         const { id, } = req.params;
@@ -114,6 +87,7 @@ const updatePemesanan = async (req, res) => {
     }
 };
 
+// Delete Arsip Penjualan
 const deletePemesanan = async (req, res) => {
     try {
         const { id, } = req.params;

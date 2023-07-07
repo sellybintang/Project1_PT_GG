@@ -1,5 +1,6 @@
 const { jenisPembayaran } = require('../models');
 
+// Read All Jenis Pembayaran
 const getJenispembayaran = async (req, res) => {
     try {
         const jenispembayarans = await jenisPembayaran.findAll();
@@ -14,6 +15,7 @@ const getJenispembayaran = async (req, res) => {
     }
 };
 
+// Read Jenis Pembayaran ById
 const getJenispembayaranById = async (req, res) => {
     try {
         const { id, } = req.params;
@@ -28,6 +30,7 @@ const getJenispembayaranById = async (req, res) => {
     }
 };
 
+// Create Jenis Pembayaran
 const addJenispembayaran = async (req, res) => {
     try {
         const newJenispembayaran = await jenisPembayaran.create(req.body);
@@ -42,6 +45,7 @@ const addJenispembayaran = async (req, res) => {
     }
 };
 
+// Update Jenis Pembayaran
 const updateJenispembayaran = async (req, res) => {
     try {
         const { id, } = req.params;
@@ -56,6 +60,7 @@ const updateJenispembayaran = async (req, res) => {
     }
 };
 
+// Delete Jenis Pembayaran
 const deleteJenispembayaran = async (req, res) => {
     try {
         const { id, } = req.params;

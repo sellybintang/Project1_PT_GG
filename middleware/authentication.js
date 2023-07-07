@@ -3,7 +3,7 @@ const User = require("../app/models").Users;
 
 module.exports = function (req, res, next) {
     // req is an object
-
+    
     // Client will headers called authorization which contains JWT
     try {
         console.log(req.headers.authorization)

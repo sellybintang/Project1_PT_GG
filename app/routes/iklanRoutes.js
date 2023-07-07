@@ -9,6 +9,7 @@ const {
     deleteIklan,
 } = require('../controllers/iklanController');
 
+// Router CRUD Iklan
 router.get('/', getIklan);
 router.get('/:id', getIklanById);
 router.post('/', auth, isAdmin, createIklan);

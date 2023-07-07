@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const User = require("../models").Users;
 
+// Auth Login
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -19,6 +20,7 @@ const login = async (req, res) => {
   }
 };
 
+// Auth Register
 const register = async (req, res) => {
   const {
     firstName,
@@ -48,6 +50,7 @@ const register = async (req, res) => {
   res.status(201).json({ message: "User created successfully", token });
 };
 
+// Verify Token untuk Login User
 const verify = async (req, res) => {
   const { token } = req.body;
   if (!token) return res.status(400).json({ message: "Token tidak ada" });
@@ -63,6 +66,7 @@ const verify = async (req, res) => {
   }
 };
 
+// Auth Profile User
 const getProfile = async (req, res) => {
   console.log(req.user)
   try {
@@ -82,9 +86,9 @@ const getProfile = async (req, res) => {
   }
 };
 
+// Update Profile User
 const updateProfile = async (req, res) => {
   const { id, } = req.user;
-  // const { file, } = req;
   const {
     firstName,
     lastName,

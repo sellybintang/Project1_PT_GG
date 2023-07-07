@@ -1,5 +1,6 @@
 const { Iklan } = require('../models');
 
+// Read All Iklan
 const getIklan = async (req, res) => {
     try {
         const iklans = await Iklan.findAll();
@@ -14,6 +15,7 @@ const getIklan = async (req, res) => {
     }
 };
 
+// Read Iklb ById
 const getIklanById = async (req, res) => {
     try {
         const { id, } = req.params;
@@ -28,6 +30,7 @@ const getIklanById = async (req, res) => {
     }
 };
 
+// Create Iklan
 const createIklan = async (req, res) => {
     try {
         const newIklan = await Iklan.create(req.body);
@@ -42,6 +45,7 @@ const createIklan = async (req, res) => {
     }
 };
 
+// Update Iklan
 const updateIklan = async (req, res) => {
     try {
         const { id, } = req.params;
@@ -56,6 +60,7 @@ const updateIklan = async (req, res) => {
     }
 };
 
+// Delete Iklan
 const deleteIklan = async (req, res) => {
     try {
         const { id, } = req.params;

@@ -9,6 +9,7 @@ const {
     deletePemesanan,
 } = require('../controllers/pemesananController');
 
+// Router CRUD Pemesanan
 router.get('/',auth, isAdmin, getPemesanan);
 router.get('/:id', getPemesananById);
 router.post('/', auth, createPemesanan);

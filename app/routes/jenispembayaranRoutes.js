@@ -9,6 +9,7 @@ const {
     deleteJenispembayaran,
 } = require('../controllers/jenispembayaranController');
 
+// Router CRUD Jenis Pembayaran
 router.get('/', getJenispembayaran);
 router.get('/:id', getJenispembayaranById);
 router.post('/', auth, isAdmin, addJenispembayaran);
