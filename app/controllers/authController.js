@@ -86,6 +86,21 @@ const getProfile = async (req, res) => {
   }
 };
 
+// Auth All Profile User
+const getAllProfile = async (req, res) => {
+  console.log(req.user)
+  try {
+    const profile = await User.findAll()
+    res.status(200).json({
+      profile,
+    });
+  } catch (error) {
+    res.status(error.statusCode || 500).json({
+      message: error.message,
+    });
+  }
+};
+
 // Update Profile User
 const updateProfile = async (req, res) => {
   const { id, } = req.user;
@@ -113,5 +128,6 @@ module.exports = {
   register,
   verify,
   getProfile,
+  getAllProfile,
   updateProfile
 };
